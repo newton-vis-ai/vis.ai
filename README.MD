@@ -11,7 +11,7 @@ Portale per analizzare i dataset in maniera semplice
 
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/yourusername/yourrepository.git
+git clone https://github.com/lucapodo/vis.ai.git
 cd yourrepository
 ```
 
@@ -29,8 +29,8 @@ Please feel free to send pull request if you want to contribute!
 
 
 ## Authors
-Luca Podo
-Benny Taccardi
+1. Luca Podo
+2. Benny Taccardi
 
 
 
