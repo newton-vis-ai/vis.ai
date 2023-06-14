@@ -24,3 +24,30 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+input:focus, input.form-control:focus {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.visai-settings-form{
+    background-color: var(--text-primary) !important;
+    color: white !important;
+    margin-left: 250px !important;
+    border: 1px solid var(--text-secondary) !important;
+
+    input{
+        border: 1px solid var(--text-secondary);
+        box-shadow: none !important;
+    }
+
+    input:focus{
+        box-shadow: none !important;
+        border: 1px solid var(--text-secondary);
+    }
+}
+
