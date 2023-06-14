@@ -29,7 +29,7 @@ Please feel free to send pull request if you want to contribute!
 
 
 ## Authors
-1. Luca Podo
+1. [Luca Podo](https://github.com/lucapodo)
 2. [Benny Taccardi](https://github.com/bennytaccardi)
 
 
