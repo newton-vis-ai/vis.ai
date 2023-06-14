@@ -17,7 +17,7 @@ cd yourrepository
 
 2. **Build and run the Docker container**:
 ```bash
-docker compose -f docker-compose.yml up --build
+docker compose  up -d
 ```
 
 3. **Connect to the application**:
@@ -30,7 +30,7 @@ Please feel free to send pull request if you want to contribute!
 
 ## Authors
 1. Luca Podo
-2. Benny Taccardi
+2. [Benny Taccardi](https://github.com/bennytaccardi)
 
 
 
