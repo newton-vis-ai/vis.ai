@@ -14,6 +14,12 @@ export class HomePage {
 
   isSidebarOpen = true;
   isTyping = false;
+
+  history = [
+    {"isUser": true, "text":"ciao"},
+    {"isUser": false, "text":"come stai"},
+    {"isUser": true, "text":"bene grazie"},
+  ]
   
   constructor(private as:AlertService,
               private cs:CookieService){}
