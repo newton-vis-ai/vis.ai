@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { OpenaiService } from './openai.service';
 
-describe('OpenaiService', () => {
+describe('OpeanaiService', () => {
   let service: OpenaiService;
 
   beforeEach(() => {

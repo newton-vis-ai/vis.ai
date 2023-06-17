@@ -43,7 +43,6 @@
 
   <div class="align-item-center p-0 text-light mt-5" [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
     <div class="container-fluid px-0">
-        
         <div class="row m-0" *ngFor="let div of history" [ngClass]="{ 'user-chat-div': div.isUser, ' openai-chat-div': !div.isUser }">
             <div class="chat-text-div mx-auto p-0" style="min-height: 100px; display: flex; align-items: center;">
               <div class="row m-3">
@@ -52,45 +51,19 @@
                 </div>
                 <div class="col">
                   {{div.text}}
+                  <div id="vis"></div>
+                  <form
+                    action="http://localhost:3000/upload"
+                    method="post"
+                    enctype="multipart/form-data"
+                  >
+                  <button (click)="send()">Ciaooo</button>
+                    <input type="file" name="photo" />
+                  </form>
                 </div>
               </div>
             </div> 
-
       </div>
-
-      <!-- <div class="row m-0 user-chat-div">
-        <div class="chat-text-div mx-auto p-0" style="min-height: 100px; display: flex; align-items: center;">
-
-          <div class="row m-3">
-            <div class="col" style="max-width: 50px;">
-              <img class="rounded-circle" alt="avatar1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png" />
-            </div>
-            <div class="col">
-              ciaskljadsjkdasjkdhjkasd sdjkhasjdhjasd sjdhasjkdhas dfsdf fdsfdsfds fdsf dsf dsfds fdsf Luca
-            </div>
-          </div>
-        
-        </div> 
-      </div>
-
-      <div class="row m-0 openai-chat-div w-100">
-        <div class="chat-text-div  mx-auto p-0" style="min-height: 100px; display: flex; align-items: center;">
-
-          <div class="row m-3">
-            <div class="col" style="max-width: 50px;">
-              <img class="rounded-circle" alt="avatar1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png" />
-            </div>
-            <div class="col">
-              <span class="w-100">
-                <div id="vis"></div>
-                ciaskljadsjkdasjkdhjkasd sdjkhasjdhjasd sjdhasjkdhas dfsdf fdsfdsfds fdsf dsf dsfds fdsf
-              </span>
-            </div>
-          </div>
-
-        </div>
-      </div> -->
-
     </div>
   </div>
 

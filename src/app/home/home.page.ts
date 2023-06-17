@@ -3,7 +3,7 @@ import { AlertService } from '../services/alert.service';
 import { CookieService } from '../services/cookie.service';
 import embed from 'vega-embed';
 import {Config, TopLevelSpec, compile} from 'vega-lite';
-
+import { OpenaiService } from '../services/openai.service';
 
 @Component({
   selector: 'app-home',
@@ -20,12 +20,19 @@ export class HomePage {
     {"isUser": false, "text":"come stai"},
     {"isUser": true, "text":"bene grazie"},
   ]
+
+  
   
   constructor(private as:AlertService,
-              private cs:CookieService){}
+              private cs:CookieService,
+              private openai: OpenaiService){}
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  send(){
+      this.openai.sendRequest("");
   }
 
   typing(event:any){
