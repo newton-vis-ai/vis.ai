@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { AlertService } from '../services/alert.service';
 import { CookieService } from '../services/cookie.service';
 import embed from 'vega-embed';
-import {Config, TopLevelSpec, compile} from 'vega-lite';
+import { Config, TopLevelSpec, compile } from 'vega-lite';
 import { OpenaiService } from '../services/openai.service';
+import { supabase } from '../config/supabase';
+
 
 @Component({
   selector: 'app-home',
@@ -16,62 +18,65 @@ export class HomePage {
   isTyping = false;
 
   history = [
-    {"isUser": true, "text":"ciao"},
-    {"isUser": false, "text":"come stai"},
-    {"isUser": true, "text":"bene grazie"},
+    { "isUser": true, "text": "ciao" },
+    { "isUser": false, "text": "come stai" },
+    { "isUser": true, "text": "bene grazie" },
   ]
 
-  
-  
-  constructor(private as:AlertService,
-              private cs:CookieService,
-              private openai: OpenaiService){
-              }
+
+
+  constructor(private as: AlertService,
+    private cs: CookieService,
+    private openai: OpenaiService) {
+  }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  send(){
-      this.openai.sendRequest("");
+  send() {
+    this.openai.sendRequest("");
   }
 
-  typing(event:any){
+  async typing(event: any) {
+    // const { data, error } = await supabase.from('test').insert({ name: "sto provando supabase" });
+    // console.log(data);
+    // console.log(error);
     this.isTyping = event.target.value !== "" ? true : false;
   }
 
-  async generateVis(){
+  async generateVis() {
     console.log("devs")
 
-    // const vegaLiteSpec: TopLevelSpec = {
-    //   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-    //   data: {
-    //     values: [
-    //       {a: 'A', b: 28},
-    //       {a: 'B', b: 55},
-    //       {a: 'C', b: 43},
-    //       {a: 'D', b: 91},
-    //       {a: 'E', b: 81},
-    //       {a: 'F', b: 53},
-    //       {a: 'G', b: 19},
-    //       {a: 'H', b: 87},
-    //       {a: 'I', b: 52}
-    //     ]
-    //   },
-    //   mark: 'bar',
-    //   encoding: {
-    //     x: {field: 'a', type: 'nominal', axis: {labelAngle: 0}},
-    //     y: {field: 'b', type: 'quantitative'}
-    //   }
-    // };
-    
+    const vegaLiteSpec: TopLevelSpec = {
+      $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+      data: {
+        values: [
+          { a: 'A', b: 28 },
+          { a: 'B', b: 55 },
+          { a: 'C', b: 43 },
+          { a: 'D', b: 91 },
+          { a: 'E', b: 81 },
+          { a: 'F', b: 53 },
+          { a: 'G', b: 19 },
+          { a: 'H', b: 87 },
+          { a: 'I', b: 52 }
+        ]
+      },
+      mark: 'bar',
+      encoding: {
+        x: { field: 'a', type: 'nominal', axis: { labelAngle: 0 } },
+        y: { field: 'b', type: 'quantitative' }
+      }
+    };
+
     const config: Config = {
       bar: {
         color: 'firebrick'
       }
     };
 
-    // const vegaSpec = compile(vegaLiteSpec, {config}).spec;
+    const vegaSpec = compile(vegaLiteSpec, { config }).spec;
 
     // vegaEmbed('#vis', vlSpec);
     // await embed('#vis', vegaSpec);
@@ -98,10 +103,10 @@ export class HomePage {
           "y": {"field": "value", "type": "quantitative"}
         }
       }`;
-      const spec11 = JSON.parse(specString);
+    const spec11 = JSON.parse(specString);
 
 
-    const vegaSpec2 = compile(spec11, {config}).spec;
+    const vegaSpec2 = compile(spec11, { config }).spec;
     console.log(vegaSpec2)
 
 
@@ -115,12 +120,12 @@ export class HomePage {
     console.log(result.view);
   }
 
-  setKey(){
-    this.as.addOpenAIkey().then((result:any) => {
+  setKey() {
+    this.as.addOpenAIkey().then((result) => {
       if (result.value) {
-          console.log("Result: " + result.value);
-          this.cs.storeCookie("openAIkey", result.value) === true ? 
-              this.as.info() : this.as.errorAlert("Not saved", "The key was not correctly saved. Retrie");
+        console.log("Result: " + result.value);
+        this.cs.storeCookie("openAIkey", result.value) === true ?
+          this.as.info() : this.as.errorAlert("Not saved", "The key was not correctly saved. Retrie");
       }
     });
   }
