@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { AlertService } from '../services/alert.service';
-import { CookieService } from '../services/cookie.service';
+import { AlertService } from '../../services/alert.service';
+import { CookieService } from '../../services/cookie.service';
 import embed from 'vega-embed';
 import {Config, TopLevelSpec, compile} from 'vega-lite';
-import { OpenaiService } from '../services/openai.service';
+import { OpenaiService } from '../../services/openai.service';
+import { D3Service } from 'src/app/services/d3.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -20,12 +23,20 @@ export class HomePage {
     {"isUser": false, "text":"come stai"},
     {"isUser": true, "text":"bene grazie"},
   ]
-
   
   
   constructor(private as:AlertService,
               private cs:CookieService,
-              private openai: OpenaiService){
+              private openai: OpenaiService,
+              private d3: D3Service){
+                this.d3.readCsv("https://gist.githubusercontent.com/rnirmal/e01acfdaf54a6f9b24e91ba4cae63518/raw/6b589a5c5a851711e20c5eb28f9d54742d1fe2dc/datasets.csv").then(res =>{
+                  console.log(res)
+                  console.log(res[0].keys)
+                });
+
+                this.d3.readCsv("src/app/pages/home/test.csv").then(res =>{
+                  console.log(res.keys)
+                });
               }
 
   toggleSidebar() {
