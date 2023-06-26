@@ -40,10 +40,10 @@
     </button>
   </div>
 
-
+  
   <div class="align-item-center p-0 text-light mt-5" [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
     <div class="container-fluid px-0">
-        <div class="row m-0" *ngFor="let div of history" [ngClass]="{ 'user-chat-div': div.isUser, ' openai-chat-div': !div.isUser }">
+      <div class="row m-0" *ngFor="let div of history" [ngClass]="{ 'user-chat-div': div.isUser, ' openai-chat-div': !div.isUser }">
             <div class="chat-text-div mx-auto p-0" style="min-height: 100px; display: flex; align-items: center;">
               <div class="row m-3">
                 <div class="col" style="max-width: 50px;">
@@ -56,11 +56,12 @@
               </div>
             </div> 
       </div>
+     
     </div>
   </div>
 
   <!-- Sezione di inserimento dati -->
-  <footer class="text-center fixed-bottom align-item-center px-5" [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
+  <footer class="text-center fixed-bottom align-item-center px-5 my-0" [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
     <div class="container search">
       <div class="input-group mb-3">
           <textarea type="text" class="form-control input shadow-none mt-2 pt-2" placeholder="Search" aria-label="Search" (input)="typing($event)"></textarea>
@@ -71,6 +72,16 @@
               </button>
           </div>
       </div>
+    </div>
+
+    <div class="csv">
+      <div class="row w-100 justify-content-center">
+        <div class="col mx-auto">
+          <button type="button" class="btn btn-light" (click)="isPreviewOpen = !isPreviewOpen">Show Preview Csv</button>
+        </div>
+        
+      </div>
+      <app-preview *ngIf="isPreviewOpen"></app-preview>
     </div>
   </footer>
 

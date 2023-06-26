@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { D3Service } from './d3.service';
+import { D3Service } from './csv.service';
 
 describe('D3Service', () => {
   let service: D3Service;

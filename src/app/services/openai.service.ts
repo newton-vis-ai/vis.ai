@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +8,6 @@ export class OpenaiService {
   constructor(private http: HttpClient) { }
 
   sendRequest(key:any){
-
     this.http
       .post('https://api.openai.com/v1/completions', 
         JSON.stringify({
@@ -33,4 +31,5 @@ export class OpenaiService {
         console.log(response);
       });
   }
+
 }
