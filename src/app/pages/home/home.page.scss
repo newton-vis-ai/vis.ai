@@ -2,6 +2,24 @@ textarea {
   resize: none;
 }
 
+.upload{
+  color: white !important;
+  border-radius: 2rem;
+  color: var(--text-primary) !important;
+  font-size: .875rem;
+  background-color: var(--color-primary);
+  width: auto !important;
+}
+
+.cols{
+  color: white !important;
+  border-radius: 2rem;
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-primary);
+  font-size: .875rem;
+  // background-color: var(--color-primary);
+}
+
 
 .sidebar {
   width: 250px;

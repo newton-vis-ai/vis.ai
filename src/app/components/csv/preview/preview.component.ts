@@ -11,27 +11,34 @@ export class PreviewComponent  implements OnInit {
 
   index1 = 0;
   index2 = 5;
-
+  lenCsv = 100;
   constructor(private http: HttpClient,
     public csv: CsvService) {}
 
   ngOnInit(): void {
-    this.csv.import("https://gist.githubusercontent.com/rnirmal/e01acfdaf54a6f9b24e91ba4cae63518/raw/6b589a5c5a851711e20c5eb28f9d54742d1fe2dc/datasets.csv").then(res => {
-      console.log(res);
-      console.log(this.csv.data);
-      console.log(this.csv.columns);
+    // this.csv.import("").then(res => {
+    //   console.log(res);
+    //   console.log(this.csv.data);
+    //   console.log(this.csv.columns);
 
    
-    });
+    // });
   }
 
   next(){
-    this.index1 = 5;
-    this.index2 = 10;
+    if(this.index2 < this.csv.lenCsv){
+      this.index1 += 5;
+      this.index2 += 5;
+    }
+    
   }
 
   previous(){
-
+    if(this.index1 > 0){
+      this.index1 -= 5;
+      this.index2 -= 5;
+    }
+    
   }
 
   

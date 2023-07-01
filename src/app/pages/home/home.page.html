@@ -19,13 +19,34 @@
 
       <!-- Testo informativo  -->
       <div class="p-2">
-        <h5 class="text-light mb-0">Ciao</h5>
+        <h5 class="text-light mb-0">🚨 Read here!</h5>
         <h6 class="text-light mt-2">Questo è un tool di ricerca, i tuoi dati saranno salvati del rispetto della privacy. Attualmente salviamo solo la query e il resto</h6>
       </div>
+      <hr class="hr text-light w-90 my-0"/>
+      <!-- Sezione nome colonne dataset -->
+      <div class="px-1" >
+        <h5 class="text-light">Dataset columns</h5>
+        <div *ngIf="csv.columns !== undefined">
+          <button type="button" class="btn cols clear text-start d-flex align-items-center my-3 w-auto" *ngFor="let column of csv.columns">
+            <span class="mx-2" >#{{column}}</span>
+          </button>
+        </div>
+        
+
+      </div>
+
+
+ 
 
       <!-- Sezione impostazioni -->
       <div class="settings mb-2 w-100">
         <hr class="hr text-light w-90"/>
+        <div class="px-1">
+          <button type="button" class="btn upload clear text-start d-flex align-items-center w-90" (click)="upload()">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+            <span class="mx-2">Upload dataset</span>
+          </button>
+        </div>
         <button class="btn shadow-none d-flex align-items-center" type="button" (click)="setKey()">
           <ion-icon name="settings-outline" class="text-light"></ion-icon>
           <span class="text-light mx-2">Setting</span>
@@ -44,22 +65,59 @@
   <div class="align-item-center p-0 text-light mt-5" [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
     <div class="container-fluid px-0">
       <div class="row m-0" *ngFor="let div of history" [ngClass]="{ 'user-chat-div': div.isUser, ' openai-chat-div': !div.isUser }">
-            <div class="chat-text-div mx-auto p-0" style="min-height: 100px; display: flex; align-items: center;">
-              <div class="row m-3">
-                <div class="col" style="max-width: 50px;">
-                  <img class="rounded-circle" alt="avatar1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png" />
-                </div>
-                <div class="col">
-                  {{div.text}}
-                  <div id="vis"></div>
-                </div>
-              </div>
-            </div> 
+
+       
+        <div class="chat-text-div mx-auto p-0" style="min-height: 100px; display: flex; align-items: center;">
+          
+          <div class="row m-3 w-100">
+            
+            <div class="col" style="max-width: 50px;">
+              <img class="rounded-circle" alt="avatar1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/2048px-ChatGPT_logo.svg.png" />
+            </div>
+            <div class="col">
+              {{div.text}}1
+              <div id="vis"></div>
+            </div>
+            <div class="col-auto text-end px-0">
+              <button class="btn text-light p-0" (click)="report(1)">
+                <ion-icon name="thumbs-up-outline"></ion-icon>
+              </button>
+              
+              <button class="btn text-light p-1" (click)="report(0)">
+                <ion-icon name="thumbs-down-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+        </div> 
       </div>
      
     </div>
-  </div>
 
+    <!-- <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 px-5">
+          <div class="my-3">
+            <span >Insert a link to your dataset here:</span>
+            <div class="form-group my-1">
+              <input id="textInput" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="my-3">
+            <span>Or select a toy dataset from the dropdown menu:</span>
+            <div class="form-group my-1">
+              <select id="dropdown" class="form-control">
+                <option value="https://gist.githubusercontent.com/rnirmal/e01acfdaf54a6f9b24e91ba4cae63518/raw/6b589a5c5a851711e20c5eb28f9d54742d1fe2dc/datasets.csv">Car dataset</option>
+                <option value="https://gist.githubusercontent.com/rnirmal/e01acfdaf54a6f9b24e91ba4cae63518/raw/6b589a5c5a851711e20c5eb28f9d54742d1fe2dc/datasets.csv">Medical dataset</option>
+                <option value="https://gist.githubusercontent.com/rnirmal/e01acfdaf54a6f9b24e91ba4cae63518/raw/6b589a5c5a851711e20c5eb28f9d54742d1fe2dc/datasets.csv">Financial dataset</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  
+  </div>
+ 
   <!-- Sezione di inserimento dati -->
   <footer class="text-center fixed-bottom align-item-center px-5 my-0" [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
     <div class="container search">

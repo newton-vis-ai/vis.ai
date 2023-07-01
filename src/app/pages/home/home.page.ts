@@ -19,7 +19,7 @@ export class HomePage {
 
   history = [
     {"isUser": true, "text":"ciao"},
-    {"isUser": false, "text":"come stai"},
+    {"isUser": false, "text":"come stai come stai come stai come staicome stai come stai come stai come stai come stai come stai come stai come stai come stai come stai come"},
     {"isUser": true, "text":"bene grazie"},
   ]
   
@@ -27,18 +27,32 @@ export class HomePage {
   constructor(private as:AlertService,
               private cs:CookieService,
               private openai: OpenaiService,
-              private csv: CsvService){
+              public csv: CsvService,
+              private cookie: CookieService){
               }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  send(){
+  report(val:number):void{
+    // TODO sistemare mettendo connessione al database in base al pulsante prenuto
+    this.as.inputAlert().then((result) => {
+      if (result.value) {
+          console.log("Result: " + result.value);
+      }
+    });
+  }
+
+  upload():void{
+    this.csv.uploadAlert();
+  }
+
+  send():void{
       this.openai.sendRequest("");
   }
 
-  typing(event:any){
+  typing(event:any):void{
     this.isTyping = event.target.value !== "" ? true : false;
   }
 
