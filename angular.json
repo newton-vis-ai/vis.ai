@@ -31,8 +31,12 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": []
+            "styles": [
+              "src/theme/variables.scss", 
+              "src/global.scss"],
+            "scripts": [
+             
+            ]
           },
           "configurations": {
             "production": {
@@ -111,8 +115,11 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": []
+            "styles": [
+              "src/theme/variables.scss", "src/global.scss"],
+            "scripts": [
+              
+            ]
           },
           "configurations": {
             "ci": {
