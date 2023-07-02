@@ -81,7 +81,6 @@ export class HomePage {
     // vegaEmbed('#vis', vlSpec);
     // await embed('#vis', vegaSpec);
 
-
     const specString = `
       {
         "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
