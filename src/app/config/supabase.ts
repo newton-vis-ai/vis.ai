@@ -7,3 +7,10 @@ export const supabase = createClient<Database>(
     environment.supabaseUrl,
     environment.supabaseKey
 );
+
+export const login = async () => {
+    await supabase.auth.signInWithPassword({
+        email: environment.testEmail,
+        password: environment.testPwd,
+    });
+}
