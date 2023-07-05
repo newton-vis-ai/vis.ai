@@ -50,8 +50,22 @@ export class HomePage {
     }
   }
 
-  upload(): void {
-    this.csv.uploadAlert();
+  async upload(): Promise<void> {
+    await this.csv.uploadAlert();
+    let jsonDataset = [];
+    for (const col of this.csv.columns!) {
+      const elem = {
+        column: col,
+        type: "txt"
+      };
+      jsonDataset.push(elem);
+    }
+
+    const { data, error } = await supabase.from('dataset').insert(
+      {
+        schema: jsonDataset,
+        conversation_id: 1
+      });
   }
 
   send(): void {

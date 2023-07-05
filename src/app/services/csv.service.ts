@@ -8,17 +8,17 @@ import { CookieService } from './cookie.service';
 })
 export class CsvService {
 
-  private _keys:string[] = [];
-  private _path:string = "";
-  private _data:any;
-  private _numElementsCsv:number = 0
+  private _keys: string[] = [];
+  private _path: string = "";
+  private _data: any;
+  private _numElementsCsv: number = 0
 
   constructor(
-    private as:AlertService,
-    private cookie:CookieService
-    ) { }
+    private as: AlertService,
+    private cookie: CookieService
+  ) { }
 
-  async import(path:string):Promise<boolean>{
+  async import(path: string): Promise<boolean> {
     this._path = path;
     try {
       const res = await d3.csv(this._path);
@@ -39,31 +39,34 @@ export class CsvService {
       return undefined;
     }
   }
-  
 
-  get data():any {
+
+  get data(): any {
     return this._data;
   }
 
-  get lenCsv():number {
+  get lenCsv(): number {
     return this._numElementsCsv;
   }
 
-  uploadAlert(){
-    this.as.csvAlert().then((result) => {
-      if (result.isConfirmed) {
-        const { dropdownValue, textInputValue }:any = result.value;
-  
-        if(textInputValue !== "")
-          this.cookie.setCookie("dataset", textInputValue, 1000);
-        else
-          this.cookie.setCookie("dataset", dropdownValue, 1000);
-  
-        this.import(this.cookie.getCookie ("dataset"));
-      }
-    });
+  async uploadAlert() {
+    const result = await this.as.csvAlert();
+
+    if (result.isConfirmed) {
+      const { dropdownValue, textInputValue }: any = result.value;
+
+      if (textInputValue !== "")
+        this.cookie.setCookie("dataset", textInputValue, 1000);
+      else
+        this.cookie.setCookie("dataset", dropdownValue, 1000);
+
+      await this.import(this.cookie.getCookie("dataset"));
+    }
+    console.log(this._data);
+    console.log(this._keys);
+    return result;
   }
-  
+
 
 
 }
