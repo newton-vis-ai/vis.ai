@@ -1,6 +1,7 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+
 *~
 *.sw[mnpcod]
 .tmp
@@ -66,3 +67,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/src/environments/
