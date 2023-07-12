@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AlertService } from '../../services/alert.service';
 import { CookieService } from '../../services/cookie.service';
 
@@ -7,6 +7,8 @@ import { CsvService } from 'src/app/services/csv.service';
 import { login, supabase } from '../../config/supabase';
 
 declare var $: any;
+import { OpenAI } from "langchain/llms/openai";
+
 
 @Component({
   selector: 'app-home',
@@ -15,27 +17,24 @@ declare var $: any;
 })
 export class HomePage {
 
+  @ViewChild('myTextarea') myTextarea!: ElementRef;
+
   isSidebarOpen = true;
   isTyping = false;
   isPreviewOpen = false;
+  
 
-  history = [
-    { id: 1, "isUser": true, message: "ciao" },
-    { id: 2, "isUser": false, message: "come stai come stai come stai come staicome stai come stai come stai come stai come stai come stai come stai come stai come stai come stai come" },
-    { id: 3, "isUser": true, message: "bene grazie" },
-  ]
+  history:any = []
+  
+  
+  constructor(private as:AlertService,
+              private cs:CookieService,
+              private openai: OpenaiService,
+              public csv: CsvService,
+              private cookie: CookieService){
+                const model = new OpenAI({ openAIApiKey: "sk-...", temperature: 0.9 });
+              }
 
-
-  constructor(private as: AlertService,
-    private cs: CookieService,
-    private openai: OpenaiService,
-    public csv: CsvService,
-    private cookie: CookieService) {
-  }
-
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen;
-  }
 
   async report(vote: number, message_id: number): Promise<void> {
 
@@ -68,17 +67,19 @@ export class HomePage {
       });
   }
 
-  send(): void {
-    this.openai.sendRequest("");
-  }
 
-  typing(event: any): void {
-    this.isTyping = event.target.value !== "" ? true : false;
-  }
-
-  async generateVis() {
-    console.log("devs")
-
+  chat(userText:string){
+    this.myTextarea.nativeElement.value = '';
+    this.history.push(
+      {"isUser": true, "text":userText},
+    );
+    this.openai.getDataFromOpenAPI(userText)
+    .then(data => {
+      this.history.push(
+        {"isUser": false, "text":data},
+      );
+    })
+   
   }
 
   setKey() {

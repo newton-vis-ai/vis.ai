@@ -2,20 +2,20 @@
 
 
   <div class="sidebar p-2" [ngClass]="{ 'sidebar-open': isSidebarOpen, 'sidebar-closed': !isSidebarOpen }">
-    <!-- Sezione strumenti -->
-    <div class="row mx-auto gx-3">
-      <div class="col-10 px-1">
-        <button type="button" class="btn button-ui clear text-start d-flex align-items-center">
-          <ion-icon name="refresh-outline"></ion-icon>
-          <span class="text-light mx-2">Clear chat</span>
-        </button>
+      <!-- Sezione strumenti -->
+      <div class="row mx-auto gx-3">
+        <div class="col-10 px-1">
+          <button type="button" class="btn button-ui clear text-start d-flex align-items-center">
+            <ion-icon name="refresh-outline" ></ion-icon>
+            <span class="text-light mx-2">Clear chat</span>
+          </button>
+        </div>
+        <div class="col-2 px-0">
+          <button type="button" class="btn button-ui px-2 " (click)="isSidebarOpen = !this.isSidebarOpen;">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </button>
+        </div>
       </div>
-      <div class="col-2 px-0">
-        <button type="button" class="btn button-ui px-2 " (click)="toggleSidebar()">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </button>
-      </div>
-    </div>
 
     <!-- Testo informativo  -->
     <div class="p-2">
@@ -58,18 +58,15 @@
 
   <!-- Pulsante per aprire side bar -->
   <div class="open-sidebar-btn m-2">
-    <button type="button" class="btn button-ui px-2"
-      [ngClass]="{ 'sidebar-open': !isSidebarOpen, 'sidebar-closed': isSidebarOpen }" (click)="toggleSidebar()">
+    <button type="button" class="btn button-ui px-2" [ngClass]="{ 'sidebar-open': !isSidebarOpen, 'sidebar-closed': isSidebarOpen }" (click)="isSidebarOpen = !this.isSidebarOpen;">
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </button>
   </div>
 
-
-  <div class="align-item-center p-0 text-light mt-5"
-    [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
+  
+  <div class="align-item-center p-0 text-light mt-5" [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
     <div class="container-fluid px-0">
-      <div class="row m-0" *ngFor="let div of history"
-        [ngClass]="{ 'user-chat-div': div.isUser, ' openai-chat-div': !div.isUser }">
+      <div class="row m-0" *ngFor="let div of history" [ngClass]="{ 'user-chat-div': div.isUser, ' openai-chat-div': !div.isUser }">
 
 
         <div class="chat-text-div mx-auto p-0" style="min-height: 100px; display: flex; align-items: center;">
@@ -129,15 +126,13 @@
     [ngClass]="{'content-open': !isSidebarOpen, 'content': isSidebarOpen }">
     <div class="container search">
       <div class="input-group mb-3">
-        <textarea type="text" class="form-control input shadow-none mt-2 pt-2" placeholder="Search" aria-label="Search"
-          (input)="typing($event)"></textarea>
-        <div class="input-group-append">
-          <button class="btn shadow-none submit-button" type="button" (click)="generateVis()">
-            <ion-icon name="sparkles" class="submit-icon"
-              [ngClass]="{ 'submit-icon': !isTyping, 'submit-icon-active': isTyping }">
-            </ion-icon>
-          </button>
-        </div>
+          <textarea #myTextarea type="text" class="form-control input shadow-none mt-2 pt-2" placeholder="Search" aria-label="Search" (input)=" isTyping = myTextarea.value !== ''"></textarea>
+          <div class="input-group-append">
+              <button class="btn shadow-none submit-button" type="button" (click)="chat(myTextarea.value)">
+                   <ion-icon name="sparkles" class="submit-icon" [ngClass]="{ 'submit-icon': !isTyping, 'submit-icon-active': isTyping }">
+                   </ion-icon>
+              </button>
+          </div>
       </div>
     </div>
 
